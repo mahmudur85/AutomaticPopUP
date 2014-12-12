@@ -254,7 +254,7 @@ void loop(void)
 			motor_move_count = 0;
 			boardPosition = BHIGH;
 			motorState = STOP;
-			setMotorStop(0);
+			setMotorStop(1);
 			sendDone();
 			if (debug>0)
 			{

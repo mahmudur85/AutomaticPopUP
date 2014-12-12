@@ -34,4 +34,4 @@ void serialEvent();
 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\variants\mega\pins_arduino.h" 
 #include "C:\Program Files (x86)\Arduino\hardware\arduino\cores\arduino\arduino.h"
-#include "F:\Topu Essential\Work\GitHub\automatic_popup\automatic_popup\automatic_popup.ino"
+#include "F:\Topu Essential\Work\GitHub\AutomaticPopUP\automatic_popup\automatic_popup.ino"
