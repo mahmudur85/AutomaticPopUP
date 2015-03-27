@@ -46,8 +46,9 @@ boolean motor_moving_reverse = false;
 uint16_t motor_move_count = 0;
 
 const uint16_t motorForwarMoveTimeLimit = 24;
-const uint16_t motorReverseMoveTimeLimit = 6;
+const uint16_t motorReverseMoveTimeLimit = 5;
 const uint16_t motorManualMoveTimeLimit = 50;
+const uint16_t boardLowStateTimeLimit = 10;
 
 // Board related variables
 enum BoardPosition
@@ -118,7 +119,7 @@ void setup(void)
 	current = 0;
 	
 	setSignalLED(0);
-	setMotorStop(0);
+	setMotorStop(1);
 	
 	sendDeviceReady();
 }
@@ -245,7 +246,7 @@ void loop(void)
 			if(current >= 4000){
 				//motor_move_count = motorForwarMoveTimeLimit;				
 				motorSoftStop();
-				setSignalLED(0);
+				setSignalLED(1);
 			}
 		}
 		if(motor_move_count == motorForwarMoveTimeLimit)
@@ -271,7 +272,7 @@ void loop(void)
 			boardPosition = BLOW;
 			board_low_position_count = 0;
 			motorState = STOP;
-			setMotorStop(0);
+			setMotorStop(1);
 			if (debug>0)
 			{
 				Serial.println("MRMTLR");
@@ -283,7 +284,7 @@ void loop(void)
 	if (boardPosition == BLOW)
 	{
 		board_low_position_count++;
-		if(board_low_position_count == 1){
+		if(board_low_position_count == boardLowStateTimeLimit){
 			board_low_position_count = 0;
 			motorState = FORWARD;
 			setSignalLED(1);
